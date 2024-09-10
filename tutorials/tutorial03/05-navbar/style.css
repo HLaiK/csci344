@@ -10,3 +10,36 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
 }
+
+nav {
+    display: flex;
+    position: fixed;
+    top: 0;
+    margin: 20px;
+    padding: 10px;
+    height: 120px;
+    gap: 800px;
+    border: 2px solid black;
+    align-items: center;
+  }
+  ul{
+    display: flex;
+    list-style-type: none;
+    border: 2px solid black;
+    flex-wrap: wrap;
+    padding: 5px;
+  }
+  li{
+    border: 2px solid black;
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+}  
+
+a{
+    border: 2px solid black;
+    padding: 5px;
+    color:black;
+    font-weight: bold;
+    text-decoration: none;
+}

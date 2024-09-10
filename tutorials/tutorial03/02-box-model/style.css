@@ -24,3 +24,10 @@ main {
 Part 1: Create some style blocks to style the card. 
     Experiment with: border, padding, margin, height, and width.
 */
+.card{
+    width: 300px;
+    border: 1px solid black;
+}
+.card p, h2, button{
+    margin: 15px;
+}

@@ -1,0 +1,160 @@
+body {
+    font-family: 'Comfortaa', sans-serif;
+    background-color: #f9f9f9;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    z-index: 1000;
+}
+
+.nav-left h1 {
+    font-size: 24px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-right .username {
+    margin-right: 15px;
+}
+
+.logout-btn {
+    background-color:white;
+    color: blue;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    margin-top: 80px;
+}
+
+.stories-panel, .posts {
+    flex: 1;
+    margin-right: 20px;
+}
+.stories-panel{
+
+}
+.recommendations {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 80px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+.follow-btn{
+    color: blue;
+    background-color: #f9f9f9;
+    border: none;
+}
+.suggestion{
+    display: grid;
+    grid-template-columns: 80px auto 80px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.profile, .suggestion {
+    display: flex;
+    align-items:center;
+    margin-bottom: 20px;
+}
+
+.suggestion img, .profile img, .story img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.story {
+    display: flex;
+    background-color: white;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.card-actions i {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.likes {
+    margin-bottom: 10px;
+}
+
+.caption {
+    margin-bottom: 10px;
+}
+
+.add-comment {
+    display: flex;
+    align-items: center;
+}
+
+.add-comment input {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin: 0 10px;
+}
+
+.add-comment .post-btn {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    .recommendations {
+        display: none;
+    }
+
+    main {
+        flex-direction: column;
+    }
+
+    .stories-panel {
+        margin: 0 auto;
+        display: flex;
+        overflow-x: auto;
+    }
+}

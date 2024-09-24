@@ -1,18 +1,25 @@
 const defaultTheme = ev => {
-    // your code here.
+    document.body.className = '';
 };
 
 const oceanTheme = ev => {
-   // your code here.
+    defaultTheme();
+    document.body.classList.add('ocean');  
 };
 
 const desertTheme = ev => {
-   // your code here.
+    defaultTheme();
+    document.body.classList.add('desert'); 
 };
 
 const highContrastTheme = ev => {
-    // your code here.
+    defaultTheme();
+    document.body.classList.add('high-contrast'); 
 }; 
+document.getElementById('default').addEventListener('click', defaultTheme);
+document.getElementById('ocean').addEventListener('click', oceanTheme);
+document.getElementById('desert').addEventListener('click', desertTheme);
+document.getElementById('high-contrast').addEventListener('click', highContrastTheme);
 
 /*
     Hints: 

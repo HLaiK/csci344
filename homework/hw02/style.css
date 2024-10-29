@@ -1,8 +1,12 @@
+/* Body Styling */
 body {
     font-family: 'Comfortaa', sans-serif;
     background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
 }
 
+/* Navigation Bar */
 .navbar {
     position: fixed;
     top: 0;
@@ -16,10 +20,12 @@ body {
     z-index: 1000;
 }
 
+/* Nav Left - Title/Logo */
 .nav-left h1 {
     font-size: 24px;
 }
 
+/* Nav Right - Username & Logout */
 .nav-right {
     display: flex;
     align-items: center;
@@ -30,25 +36,57 @@ body {
 }
 
 .logout-btn {
-    background-color:white;
+    background-color: white;
     color: blue;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
 }
 
+/* Main Layout */
 main {
     display: flex;
     margin-top: 80px;
+    padding: 20px;
 }
 
-.stories-panel, .posts {
+/* Stories Panel */
+.stories-panel {
     flex: 1;
-    margin-right: 20px;
+    display: flex;
+    justify-content: center;  /* Centering horizontally */
+    max-width: 600px;         /* Maximum width for stories */
+    margin: 20px auto;        /* Auto margins to center the panel */
+    overflow-x: auto;         /* Ensure it is scrollable if content overflows */
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;   /* Slight border to match other sections */
 }
-.stories-panel{
 
+.story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 15px;
 }
+
+.story img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+.story p {
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+}
+
+/* Recommendations Panel */
 .recommendations {
     width: 300px;
     display: flex;
@@ -58,34 +96,55 @@ main {
     top: 80px;
     padding: 20px;
     background-color: #f9f9f9;
+    border-left: 1px solid #ccc;
 }
-.follow-btn{
-    color: blue;
-    background-color: #f9f9f9;
-    border: none;
-}
-.suggestion{
-    display: grid;
-    grid-template-columns: 80px auto 80px;
+
+.profile {
+    display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
-.profile, .suggestion {
-    display: flex;
-    align-items:center;
-    margin-bottom: 20px;
-}
 
-.suggestion img, .profile img, .story img {
+.profile img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 15px;
 }
 
-.story {
-    display: flex;
+.suggestions-header {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.suggestion {
+    display: grid;
+    grid-template-columns: 80px auto 80px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.suggestion img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.follow-btn {
     background-color: white;
+    color: blue;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+/* Post Cards */
+.posts {
+    margin-top: 20px;  
+    width: 100%;
+    max-width: 600px; 
 }
 
 .card {
@@ -103,6 +162,16 @@ main {
     margin-bottom: 15px;
 }
 
+.card-header i {
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
 .card-actions {
     display: flex;
     justify-content: space-between;
@@ -115,10 +184,15 @@ main {
 }
 
 .likes {
+    font-weight: bold;
     margin-bottom: 10px;
 }
 
 .caption {
+    margin-bottom: 10px;
+}
+
+.comments {
     margin-bottom: 10px;
 }
 
@@ -156,5 +230,10 @@ main {
         margin: 0 auto;
         display: flex;
         overflow-x: auto;
+    }
+
+    .card {
+        margin-left: 0;
+        margin-right: 0;
     }
 }

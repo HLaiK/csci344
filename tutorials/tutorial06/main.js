@@ -44,12 +44,41 @@ const filterTermMatched = (course) => {
 // Part 1.2
 const dataToHTML = (course) => {
     // modify this
-    return `Some HTML representation of the course...`;
+    return `
+        <section class="course">
+            <h2>${course.Code}: ${course.Title}</h2>
+            <p>
+                <i class="fa-solid fa-circle-check"></i> 
+                Open  &bull; 10174 &bull; Seats Available: 1
+            </p>
+            <p>
+                ${course.Days}&bull; ${course.Location.FullLocation || ""} &bull; ${course.Hours || ""}
+            </p>
+            <p><strong>${course.Instructors.Name || ""}</strong></p>
+        </section>
+    `;
 };
 
+const addCourseToDOM = (course) => {
+    const htmlSnippet = dataToHTML(course);
+    const containerEl = document.querySelector(".courses");
+    containerEl.innerHTML += htmlSnippet;
+}
 // Part 2
 const showData = (searchTerm, openOnly) => {
     console.log(searchTerm, openOnly);
     console.log(data); // imported from course-data.js
     // Your code here:
+
+    const searchTermMatch = (course) => {
+        console.log(course.Title, searchTerm);
+        if(course.Title.toLowerCase().includes(searchTerm.toLowerCase())){
+            return true;
+        }
+        return false;
+    };
+
+    document.querySelector(".courses").innerHTML = "";
+
+    data.filter(searchTermMatch).forEach(addCourseToDOM);
 };

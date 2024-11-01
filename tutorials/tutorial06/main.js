@@ -29,11 +29,7 @@ const search = (ev) => {
     showData(searchTerm, openOnly);
 };
 
-// Part 1.1a
-const filterClassFull = (course) => {
-    // modify this
-    return true;
-};
+
 
 // Part 1.1b
 const filterTermMatched = (course) => {
@@ -49,10 +45,10 @@ const dataToHTML = (course) => {
             <h2>${course.Code}: ${course.Title}</h2>
             <p>
                 <i class="fa-solid fa-circle-check"></i> 
-                Open  &bull; 10174 &bull; Seats Available: 1
+                Open  &bull; ${course.CRN} &bull; Seats Available: 1
             </p>
             <p>
-                ${course.Days}&bull; ${course.Location.FullLocation || ""} &bull; ${course.Hours || ""}
+                ${course.Days}&bull; ${course.Location.FullLocation || ""} &bull; ${course.Hours || ""} credit hour(s)
             </p>
             <p><strong>${course.Instructors.Name || ""}</strong></p>
         </section>

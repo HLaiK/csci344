@@ -2,3 +2,54 @@ body{
     background-image: url(IMG_1065.JPG);
     background-size: 1500px 700px;
 }
+
+a , a:visited {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+h1 {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    text-decoration: underline white;
+}
+
+.sub-section{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#Tutorial {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    border: 2px solid white;
+    color: white;
+    padding: 20px;
+    margin-left: -80px;
+}
+
+#Homework{
+    display: grid;
+    grid-template-columns: auto ;
+    border: 2px solid white;
+    color: white;
+    padding: 20px;
+    margin-right: 20px;
+
+}
+
+#Quizzes{
+    display: grid;
+    grid-template-columns: auto ;
+    border: 2px solid white;
+    color: white;
+    padding: 20px;
+}

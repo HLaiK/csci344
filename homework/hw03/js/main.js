@@ -1,17 +1,13 @@
 import { getAccessToken } from "./utilities.js";
 const rootURL = "https://photo-app-secured.herokuapp.com";
 let token = null;
-let username = "webdev";
+let username = "laiza";
 let password = "password";
 
 async function initializeScreen() {
-    token = await getToken();
+    token = await getAccessToken(rootURL, username, password);
     showNav();
     getPosts();
-}
-
-async function getToken() {
-    return await getAccessToken(rootURL, username, password);
 }
 
 function showNav() {
@@ -47,44 +43,35 @@ async function getPosts() {
 
 function showPosts(posts){
     const mainEL = document.querySelector("main");
-    posts.forEach((post) => {
-        const template = `
+    posts.forEach(post => {
+        const Template = `
                 <section class="bg-white border mb-10">
             <div class="p-4 flex justify-between">
-                <h3 class="text-lg font-Comfortaa font-bold">gibsonjack</h3>
+                <h3 class="text-lg font-Comfortaa font-bold">${post.user.username}</h3>
                 <button class="icon-button"><i class="fas fa-ellipsis-h"></i></button>
             </div>
-            <img src="https://picsum.photos/300/200?q=1" alt="placeholder image" width="300" height="300"
+            <img src="${post.image_url}" alt="${post.alt_text}" width="300" height="300"
                 class="w-full bg-cover">
             <div class="p-4">
                 <div class="flex justify-between text-2xl mb-3">
                     <div>
-                        <button><i class="far fa-heart"></i></button>
+                        ${ getLikeButton(post)}
                         <button><i class="far fa-comment"></i></button>
                         <button><i class="far fa-paper-plane"></i></button>
                     </div>
                     <div>
-                        <button><i class="far fa-bookmark"></i></button>
+                        ${ getBookmarkButton(post)}
                     </div>
                 </div>
-                <p class="font-bold mb-3">30 likes</p>
+                <p class="font-bold mb-3">${post.likes.length} like(s)</p>
                 <div class="text-sm mb-3">
                     <p>
-                        <strong>gibsonjack</strong>
-                        Here is a caption about the photo.
-                        Text text text text text text text text text
-                        text text text text text text text text... <button class="button">more</button>
+                        <strong>${post.user.username}</strong>
+                        ${post.caption}<button class="button">more</button>
                     </p>
                 </div>
-                <p class="text-sm mb-3">
-                    <strong>lizzie</strong>
-                    Here is a comment text text text text text text text text.
-                </p>
-                <p class="text-sm mb-3">
-                    <strong>vanek97</strong>
-                    Here is another comment text text text.
-                </p>
-                <p class="uppercase text-gray-500 text-xs">1 day ago</p>
+                ${ showComments(post.comments) }
+                <p class="uppercase text-gray-500 text-xs">${post.display_time}</p>
             </div>
             <div class="flex justify-between items-center p-3">
                 <div class="flex items-center gap-3 min-w-[80%]">
@@ -94,10 +81,83 @@ function showPosts(posts){
                 <button class="text-blue-500 py-2">Post</button>
             </div>
         </section>
-        `;
-        mainEL.insertAdjacentHTML("beforeend",template);
+        `; 
+        mainEL.insertAdjacentHTML("beforeend",Template);
     });
 }
+function showComments(comments){
+    if(comments.length > 1){
+        const lastComment = comments[comments.length-1];
+        return `
+            <button class="text-sm mb-3" > view all ${comments.length} comments </button>
+            <p class="text-sm mb-3" >
+            <strong> ${lastComment.user.username}</strong> ${lastComment.text}</p>
+        `;
+    }
+    if(comments.length === 1){
+        const lastComment = comments[0];
+        return `<p class="text-sm mb-3">
+        <strong>${comments[0].user.username}<?strong> ${comments[0].text}
+        </p>`
+    }
+    return '';
+}
 
+function getLikeButton(post){
+   let iconClass = "far"
+   if (post.current_user_like_id){
+        iconClass = "fa-solid text-red-500"
+   }
+   return `<button><i class="${iconClass} fa-heart"></i></button>`
+}
+
+function getBookmarkButton(post){
+    if (post.current_user_bookmark_id){
+        return `<button onclick="deleteBookmark(${post.current_user_bookmark_id})"><i class="fa-solid fa-bookmark"></i></bookmark>`
+    }else{
+        return `
+        <button onclick="createBookmark(${post.id})">
+            <i class="far fa-bookmark"></i>
+        </button>`;
+    }
+    // let iconClass = "far"
+    // if (post.current_user_bookmark_id){
+    //      iconClass = "fa-solid"
+    // }
+    // return `<button><i class="${iconClass} fa-bookmark"></i></button>`
+ }
+
+window.createBookmark = async function(postID){
+    const postData = {
+        "post_id": postID
+    };
+    
+    //await / async syntax:
+        const response = await fetch("https://photo-app-secured.herokuapp.com/api/bookmarks/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(postData)
+        });
+        const data = await response.json();
+        console.log(data);
+}
+window.deleteBookmark = async function(bookmarkId){
+    //await / async syntax:
+async function getAndShowData() {
+    const response = await fetch("https://photo-app-secured.herokuapp.com/api/bookmarks/${bookmarkId}", {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+    });
+    const data = await response.json();
+    console.log(data);
+}
+}
+   
 // after all of the functions are defined, invoke initialize at the bottom:
 initializeScreen();

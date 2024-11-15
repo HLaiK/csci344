@@ -103,28 +103,63 @@ function showComments(comments){
     return '';
 }
 
-function getLikeButton(post){
-   let iconClass = "far"
-   if (post.current_user_like_id){
-        iconClass = "fa-solid text-red-500"
-   }
-   return `<button><i class="${iconClass} fa-heart"></i></button>`
+function getLikeButton(post) {
+    if (post.current_user_like_id) {
+        return `
+        <button onclick="deleteLike(${post.current_user_like_id})">
+            <i class="fa-solid text-red-700 fa-heart"></i>
+        </button>`;
+    }
+    else {
+        return `
+        <button onclick="createLike(${post.id})">
+            <i class="far fa-heart"></i>
+        </button>`;
+    }
+}
+
+window.createLike = async function(postID) {
+    const postData = {
+        post_id: postID,
+    };
+
+    const response = await fetch("https://photo-app-secured.herokuapp.com/api/likes/", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`    
+        },
+        body: JSON.stringify(postData)
+    });
+
+    const data = await response.json();
+    console.log(data);
+}
+
+window.deleteLike = async function(likeID) {
+    const response = await fetch(`https://photo-app-secured.herokuapp.com/api/likes/${likeID}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token} `
+        }
+    });
+
+    const data = await response.json();
+    console.log(data);
 }
 
 function getBookmarkButton(post){
     if (post.current_user_bookmark_id){
-        return `<button onclick="deleteBookmark(${post.current_user_bookmark_id})"><i class="fa-solid fa-bookmark"></i></bookmark>`
+        return `<button onclick="deleteBookmark(${post.current_user_bookmark_id})">
+        <i class="fa-solid fa-bookmark"></i></bookmark>`
     }else{
         return `
         <button onclick="createBookmark(${post.id})">
             <i class="far fa-bookmark"></i>
         </button>`;
     }
-    // let iconClass = "far"
-    // if (post.current_user_bookmark_id){
-    //      iconClass = "fa-solid"
-    // }
-    // return `<button><i class="${iconClass} fa-bookmark"></i></button>`
+    
  }
 
 window.createBookmark = async function(postID){
@@ -145,8 +180,6 @@ window.createBookmark = async function(postID){
         console.log(data);
 }
 window.deleteBookmark = async function(bookmarkId){
-    //await / async syntax:
-async function getAndShowData() {
     const response = await fetch("https://photo-app-secured.herokuapp.com/api/bookmarks/${bookmarkId}", {
         method: "DELETE",
         headers: {
@@ -157,7 +190,7 @@ async function getAndShowData() {
     const data = await response.json();
     console.log(data);
 }
-}
+
    
 // after all of the functions are defined, invoke initialize at the bottom:
 initializeScreen();

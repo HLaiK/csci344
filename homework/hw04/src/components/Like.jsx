@@ -2,33 +2,33 @@ import React, { useState } from "react";
 
 import { postDataToServer, deleteDataFromServer } from "../server-requests";
 
-export default function Like({ likeID, postID, token }) {
-  const [_likeID, _setLikeID] = useState(likeID);
+export default function Like({ likeId, postId, token }) {
+  const [_likeId, _setLikeId] = useState(likeId);
 
   async function createLike() {
     const sendData = {
-      post_id: postID,
+      post_id: postId,
     };
 
     const responseData = await postDataToServer(token, "/api/likes/", sendData);
 
     console.log(responseData);
 
-    _setLikeID(responseData.id);
+    _setLikeId(responseData.id);
   }
 
   async function deleteLike() {
     const responseData = await deleteDataFromServer(
       token,
-      "api/likes/" + _likeID
+      "api/likes/" + _likeId
     );
 
     console.log(responseData);
 
-    _setLikeID(null);
+    _setLikeId(null);
   }
 
-  return _likeID ? (
+  return _likeId ? (
     <button
       aria-label="remove like"
       aria-checked="true"

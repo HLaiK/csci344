@@ -86,7 +86,7 @@ class TestPostDetailEndpoint(unittest.TestCase):
         response = utils.issue_patch_request(
             url, json={}, user_id=self.current_user.get("id")
         )
-        # print(response.json())
+        #print(response.json())
         self.assertEqual(response.status_code, 404)
 
     def test_post_delete(self):

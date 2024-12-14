@@ -14,9 +14,9 @@ export default function Profile({ token }) {
   }, []);
 
   return (
-    <header className="flex gap-4 items-center">
-      <img src={profile.thumb_url} className="rounded-full w-16" />
-      <h2 className="font-Comfortaa font-bold text-2xl">{profile.username}</h2>
+    <header class="flex gap-4 items-center">
+      <img src={profile.thumb_url} class="rounded-full w-16" />
+      <h2 class="font-Comfortaa font-bold text-2xl">{profile.username}</h2>
     </header>
   );
 }
